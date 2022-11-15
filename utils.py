@@ -1,12 +1,22 @@
 import numpy as np
 import pandas as pd
+from re import compile, match
 
 def parse_document(document):
     """Parse document into a list of words."""
-    return document.split()
+    parsed_document = []
+    pattern = compile(r'\w*[\d\.\,]\w*')
+    lines = document.split('\n')
+    for line in lines:
+        for word in line.split():
+            if match(pattern, word):
+                continue
+            parsed_document.append(word)
+    return parsed_document[1:]
+       
 
 def parse_documents(documents):
-    """Parse documents into a list of words."""
+    """Parse documents into a list of words by document."""
     return [parse_document(document) for document in documents]
     
 def get_vocabulary(documents):
@@ -22,7 +32,12 @@ def get_word_counts(documents, vocabulary):
     word_counts = pd.DataFrame(0, index=np.arange(len(documents)), columns=vocabulary)
     for i, document in enumerate(documents):
         for word in document:
-            word_counts.loc[i, word] += 1
+            pw = word
+            try:
+               pw = int(word)
+            except ValueError:
+               pass
+            word_counts.loc[i, pw] += 1
     return word_counts
     
 def get_cosine_similarity(query, vectors):
