@@ -32,12 +32,7 @@ def get_word_counts(documents, vocabulary):
     word_counts = pd.DataFrame(0, index=np.arange(len(documents)), columns=vocabulary)
     for i, document in enumerate(documents):
         for word in document:
-            pw = word
-            try:
-               pw = int(word)
-            except ValueError:
-               pass
-            word_counts.loc[i, pw] += 1
+            word_counts.loc[i, word] += 1
     return word_counts
     
 def get_cosine_similarity(query, vectors):
