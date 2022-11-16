@@ -37,8 +37,7 @@ def get_vocabulary(documents):
 
 def get_word_counts(documents, vocabulary):
     """Get word counts from documents."""
-    word_counts = pd.DataFrame(index=np.arange(len(documents)), columns=vocabulary)
-    print(word_counts)
+    word_counts = pd.DataFrame(0, index=np.arange(len(documents)), columns=vocabulary)
     for i, document in enumerate(documents):
         for word in document:
             word_counts[word][i] += 1
@@ -51,7 +50,7 @@ def get_cosine_similarity(query, vectors):
     query_norm = np.linalg.norm(query)
     cosine_similarity = {}
     for i, norm in enumerate(norms):
-        cosine_similarity[i] = dot_products[i, i] / (norm * query_norm)
+        cosine_similarity[i] = dot_products[i][i] / (norm * query_norm)
     return cosine_similarity
 
 def get_word_frequencies(documents):
