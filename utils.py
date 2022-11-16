@@ -4,7 +4,7 @@ from re import compile, match
 
 def parse_query(query):
     """Parse query into a list of words."""
-    pattern = compile(r'[\w\W]*[ ]+[\w\W]*')
+    pattern = compile(r'[\w\W]* [\w\W]*')
     if match(pattern, query):
         return query.split()
     return [query]
@@ -38,10 +38,9 @@ def get_vocabulary(documents):
 def get_word_counts(documents, vocabulary):
     """Get word counts from documents."""
     word_counts = pd.DataFrame(index=np.arange(len(documents)), columns=vocabulary)
-    print(word_counts)
     for i, document in enumerate(documents):
         for word in document:
-            word_counts[i, word] += 1
+            word_counts[word][i] += 1
     return word_counts
     
 def get_cosine_similarity(query, vectors):

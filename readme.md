@@ -20,4 +20,16 @@ La idea básica de este modelo de recuperación vectorial reside en la construcc
 
 La segunda idea asociada a este modelo es calcular la similitud entre la pregunta (que se convertiría en el vector pregunta, expresado en función de la aparición de los n términos en la expresión de búsqueda) y los m vectores de documentos almacenados. Los más similares serían aquellos que deberían colocarse en los primeros lugares de la respuesta.
 
-##### 
+##### Implementación actual:
+
+###### Aproximación por cosenos:
+La aproximación por el coseno entre dos vectores concurre en que tan distantes son las direcciones de los mismos, con esta idea y lo planteado anteriormente del modelo vectorial se tiene la actual implementación.
+
+###### Procesamiento de los datos:
+La idea es convertir todos los documentos del dataset en vectores (parse_documents), procesar la ¨query¨(pregunta) para que también sea un vector (parse_query), determinar el vocabulario de todo el conjunto de vectores (get_vocabulary) y calcular las ocurrencias de cada palabra del vocabulario en el documento (get_word_counts).
+
+###### Obtención del resultado:
+Aplicando la aproximación por cosenos al vector pregunta con los vectores de documentos se obtiene un top de los más próximos a la pregunta según el modelo. (get_cosine_similarity)
+
+###### Forma de uso:
+Para la implementación actual ser ejecutada es necesario escribir en la consola interactiva
