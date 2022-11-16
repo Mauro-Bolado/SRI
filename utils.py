@@ -41,7 +41,7 @@ def get_word_counts(documents, vocabulary):
     print(word_counts)
     for i, document in enumerate(documents):
         for word in document:
-            word_counts[i, word] += 1
+            word_counts[word][i] += 1
     return word_counts
     
 def get_cosine_similarity(query, vectors):
