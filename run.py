@@ -17,7 +17,7 @@ def main():
     data = sys.argv[2]
     
     raw_documents = parse_dataset(data)
-    dataset = raw_documents.__add__(query.split(' '))
+    dataset = raw_documents.__add__(parse_query(query))
     print(vectorial_model(query, dataset))
     
     

@@ -2,6 +2,13 @@ import numpy as np
 import pandas as pd
 from re import compile, match
 
+def parse_query(query):
+    """Parse query into a list of words."""
+    pattern = compile(r'[\w\W]*[ ]+[\w\W]*')
+    if match(pattern, query):
+        return query.split()
+    return [query]
+
 def parse_document(document):
     """Parse document into a list of words."""
     parsed_document = []
