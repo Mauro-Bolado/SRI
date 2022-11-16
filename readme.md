@@ -26,10 +26,13 @@ La segunda idea asociada a este modelo es calcular la similitud entre la pregunt
 La aproximación por el coseno entre dos vectores concurre en que tan distantes son las direcciones de los mismos, con esta idea y lo planteado anteriormente del modelo vectorial se tiene la actual implementación.
 
 ###### Procesamiento de los datos:
-La idea es convertir todos los documentos del dataset en vectores (parse_documents), procesar la ¨query¨(pregunta) para que también sea un vector (parse_query), determinar el vocabulario de todo el conjunto de vectores (get_vocabulary) y calcular las ocurrencias de cada palabra del vocabulario en el documento (get_word_counts).
+La idea es convertir todos los documentos del dataset en vectores (parse_documents), procesar la ¨query¨(consulta) para que también sea un vector (parse_query), determinar el vocabulario de todo el conjunto de vectores (get_vocabulary) y calcular las ocurrencias de cada palabra del vocabulario en el documento (get_word_counts).
 
 ###### Obtención del resultado:
 Aplicando la aproximación por cosenos al vector pregunta con los vectores de documentos se obtiene un top de los más próximos a la pregunta según el modelo. (get_cosine_similarity)
 
-###### Forma de uso:
-Para la implementación actual ser ejecutada es necesario escribir en la consola interactiva
+###### Forma de uso y particularidades:
+Para la implementación actual ser ejecutada es necesario escribir en la consola interactiva:
+- python run.py [query argument] [dataset path argument]
+  
+Se obtiene como resultado una lista de 10 (valor modificable en futuras versiones) documentos que fueron los más cercanos a la consulta.
