@@ -12,7 +12,7 @@ def parse_query(query):
 def parse_document(document):
     """Parse document into a list of words."""
     parsed_document = []
-    pattern = compile(r'\w*[\d\.\,]\w*')
+    pattern = compile(r'\w*[\d\.\,]+\w*')
     lines = document.split('\n')
     for line in lines:
         for word in line.split():
@@ -31,15 +31,17 @@ def get_vocabulary(documents):
     vocabulary = []
     for document in documents:
         for word in document:
-            vocabulary.append(word)
+            if not word in vocabulary:
+                vocabulary.append(word)
     return vocabulary
 
 def get_word_counts(documents, vocabulary):
     """Get word counts from documents."""
-    word_counts = pd.DataFrame(0, index=np.arange(len(documents)), columns=vocabulary)
+    word_counts = pd.DataFrame(index=np.arange(len(documents)), columns=vocabulary)
+    print(word_counts)
     for i, document in enumerate(documents):
         for word in document:
-            word_counts.loc[i, word] += 1
+            word_counts[i, word] += 1
     return word_counts
     
 def get_cosine_similarity(query, vectors):
