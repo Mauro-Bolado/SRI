@@ -21,10 +21,10 @@ def parse_documents(documents):
     
 def get_vocabulary(documents):
     """Get vocabulary from documents."""
-    vocabulary = set()
+    vocabulary = []
     for document in documents:
         for word in document:
-            vocabulary.add(word)
+            vocabulary.append(word)
     return vocabulary
 
 def get_word_counts(documents, vocabulary):
